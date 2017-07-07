@@ -30,7 +30,7 @@
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">David Cournapeau</h4>
 		</span>
-		<time datetime="2017-07-07T00:00:00+02:00" itemprop="datePublished">Fri 07 July 2017</time>
+		<time datetime="2017-07-07T22:40:00+02:00" itemprop="datePublished">Fri 07 July 2017</time>
 	</div>
 	<div>
 		Category:
@@ -53,14 +53,14 @@
 	</div>
 	<div itemprop="articleBody" class="article-body"><p>tl;dr: <em>rant about pytest, from the point of view of a packager who had to
 debug dozens of packages using pytest across multiple platforms</em>.</p>
-<p>In the python world, the two most common packages used for testing in addition to
-unittest(2) are nose and py.test. Both provide two fundamental functionalities:
-running test (aka they provide a test runner), and a testing framework to write
-tests. Some of the features provided by the framework are parameterized tests,
-writing function as tests, etc... I try to avoid both libraries in general,
-especially as testing frameworks, and since I have had this discussion a few
-too many times at work and outside, I thought I would write why I find those
-libraries problematic.</p>
+<p>In the python world, the two most common packages used for testing in addition
+to unittest(2) are nose and py.test. Both provide two fundamental
+functionalities: running test (aka they provide a test runner), and a testing
+framework to write tests. Some of the features provided by the framework are
+parameterized tests, writing function as tests, etc... I try to avoid both
+libraries in general, especially as testing frameworks, and since I have had
+this discussion a few too many times at work and outside, I thought I would
+write a few words explaining why I find those libraries problematic.</p>
 <p>My first issue is related to test discovery: to make discovery "simple" to use,
 both nose and py.test have fairly complex logic to detect tests. For example,
 it is fairly common to write tests inside the python package (e.g. foo/tests
@@ -70,12 +70,14 @@ non packages. They also allow to write tests without having to subclass from
 unittest.TestCase. To provide this feature, they rely on complicated, and in my
 experience brittle logic to find tests. You may object that it should be
 possible to write tests as simple functions instead of subclasses, but a
-decorator to label the test functions would be much simpler (and arguablye more
-idiomatic python). This point goes beyond mere esthetic: by making test
+decorator to label the test functions would be much simpler (and arguably more
+idiomatic python). This point goes beyond mere aesthetic: by making test
 discovery implementation simple, it is harder to miss tests by accident, and
 easier to manipulate them programmatically. For example, a feature I've missed
 for a long time is the ability to execute tests from its name (be it a method,
-class or file). It also makes testing installed packages easier.</p>
+class or file). It is hard to do well if finding your tests is complicated.
+Enforcing tests to be within proper python packages also makes testing
+installed packages easier.</p>
 <p>Another feature of pytest is the ability to write test assertions through
 python's assert statement. Besides being an abuse of assert intent, this is
 often problematic because py.test needs to figure out the appropriate
@@ -88,11 +90,11 @@ arguments, run as different tests. This is certainly useful as a feature, but
 IMO both nose and py.test make that feature not that useful in practice: it is
 difficult to identify which test fails, and to my knowledge impossible to run a
 subset of the parameterized test.</p>
-<p>Overall, those testing frameworks are fairly inflexible, and debuggins test
-issues in packages using py.test especially problematic. In most cases,
-straight up unittest(2) would be enough, except for parameterized tests, where
-a <a href="https://bugs.python.org/issue7897">proper upstream method</a> in unittest is
-still waiting to happen. If you can live with its missing features, I
+<p>Overall, those testing frameworks are fairly inflexible for non developers, and
+debugging test issues in packages using py.test especially problematic. In most
+cases, straight up unittest(2) would be enough, except for parameterized tests,
+where a <a href="https://bugs.python.org/issue7897">proper upstream method</a> in unittest
+is still waiting to happen. If you can live with its missing features, I
 personally recommend <a href="https://github.com/scalative/haas">haas</a> from my friend
 Simon Jagoe. One feature I especially like is the ability to run tests based on
 their name.</p></div>
@@ -116,11 +118,14 @@ their name.</p></div>
 					<div class="col-md-3">
 						<h4>Author</h4>
 						<ul class="list-unstyled my-list-style">
+							<li><a href="https://twitter.com/cournape">twitter</a></li>
+							<li><a href="https://github.com/cournape">github</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
+							<li><a href="./category/meta.html">meta (1)</a></li>
 							<li><a href="./category/programming.html">programming (1)</a></li>
 						</ul>
 					</div>
